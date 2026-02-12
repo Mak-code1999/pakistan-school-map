@@ -59,7 +59,6 @@ Before running this project, ensure you have:
 **Detailed guides available:**
 - 📘 **Backend Setup**: See [backend/SETUP.md](backend/SETUP.md)
 - 📗 **Frontend Setup**: See [frontend/SETUP.md](frontend/SETUP.md)
-- 📙 **GitHub Upload**: See [GITHUB_GUIDE.md](GITHUB_GUIDE.md)
 
 **Quick Setup (Summary):**
 
@@ -212,7 +211,11 @@ MIT License
 
 ## 👨‍💻 Author
 
+**Mahrkh Iftikhar**  
+GIS Analyst & Full-Stack Developer  
 Created for Jugrafiya interview assignment - February 2026
+
+📧 Contact: [GitHub Profile](https://github.com/Mak-code1999)
 
 ---
 
