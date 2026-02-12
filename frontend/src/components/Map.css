@@ -1,0 +1,214 @@
+.map-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Ensure Leaflet takes full height */
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    background: #0a0e27;
+}
+
+/* Map Legend */
+.map-legend {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    /* Leaflet uses high z-indexes */
+}
+
+.map-legend h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #00d9ff;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #8b9dc3;
+}
+
+.legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    flex-shrink: 0;
+}
+
+/* Leaflet Popup Styling to match Dark Theme */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: rgba(10, 14, 39, 0.98);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-popup-content {
+    margin: 15px;
+}
+
+.school-popup h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #00d9ff;
+    margin: 0 0 10px 0;
+}
+
+.popup-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.popup-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.popup-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.popup-value {
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* Custom Close Button for Leaflet */
+.leaflet-container a.leaflet-popup-close-button {
+    color: #00d9ff;
+    padding: 8px;
+    /* Adjusted padding */
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: #fff;
+    background: rgba(0, 217, 255, 0.1);
+    border-radius: 50%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .map-legend {
+        bottom: 20px;
+        right: 20px;
+        padding: 15px;
+        min-width: 160px;
+    }
+
+    .map-legend h4 {
+        font-size: 12px;
+    }
+
+    .legend-item {
+        font-size: 11px;
+    }
+
+    .legend-color {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* Map Controls Container */
+.map-controls {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+    z-index: 1000;
+    pointer-events: none;
+    /* Allow clicking through container */
+}
+
+.map-controls>* {
+    pointer-events: auto;
+    /* Re-enable clicking on children */
+}
+
+/* Override existing map-legend positioning */
+.map-legend {
+    position: static;
+    /* Let it flow in flex container */
+    bottom: auto;
+    right: auto;
+    margin: 0;
+}
+
+/* Add School Button */
+.add-school-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+    color: white;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.add-school-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
+}
+
+.add-school-btn.active {
+    background: linear-gradient(135deg, #ff4b4b 0%, #cc0000 100%);
+    box-shadow: 0 4px 15px rgba(255, 75, 75, 0.4);
+}
+
+.add-school-btn.active:hover {
+    box-shadow: 0 6px 20px rgba(255, 75, 75, 0.6);
+}
+
+.btn-icon {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}

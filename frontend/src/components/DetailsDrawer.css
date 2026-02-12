@@ -1,0 +1,235 @@
+/* DetailsDrawer.css */
+
+.details-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(8, 12, 34, 0.98), rgba(16, 20, 50, 0.98));
+    backdrop-filter: blur(12px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.6);
+    z-index: 1001;
+    /* Above sidebar */
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(100%);
+}
+
+.details-drawer.open {
+    transform: translateX(0);
+}
+
+/* Header */
+.drawer-header {
+    flex: 0 0 auto;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.drawer-type-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #00f2fe;
+    background: rgba(0, 242, 254, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.drawer-title {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #fff;
+    font-weight: 700;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #a0aec0;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tabs */
+.drawer-tabs {
+    flex: 0 0 auto;
+    display: flex;
+    padding: 0 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #718096;
+    padding: 16px 0;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    color: #fff;
+}
+
+.tab.active {
+    color: #00f2fe;
+    border-bottom-color: #00f2fe;
+}
+
+/* Content Area */
+.drawer-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+.drawer-content-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.drawer-content-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.drawer-content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* School Info Grid */
+.school-details-view .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.info-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #718096;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    word-break: break-word;
+    /* Handle long text */
+}
+
+/* District Stats Styling Additions */
+.stat-grid-summary {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 3px solid #f093fb;
+    flex: 1;
+}
+
+.stat-box label {
+    display: block;
+    font-size: 11px;
+    color: #a0aec0;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.value-huge {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+}
+
+.category-summary h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #718096;
+    margin-bottom: 16px;
+}
+
+.category-row {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.cat-dot.primary {
+    background: #4facfe;
+}
+
+.cat-dot.secondary {
+    background: #f093fb;
+}
+
+.cat-dot.higher_secondary {
+    background: #ffd93d;
+}
+
+.cat-dot.university {
+    background: #f5576c;
+}
+
+.cat-name {
+    flex: 1;
+    color: #e2e8f0;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.cat-count {
+    font-weight: 600;
+    color: #fff;
+}

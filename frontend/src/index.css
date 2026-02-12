@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ======================
+     THEME SYSTEM: DEEP GLASS
+     ====================== */
+
+  /* Primary Brand Colors */
+  --primary: #00f2fe;
+  /* Cyan for actice states */
+  --primary-dark: #00b4d8;
+  --secondary: #4facfe;
+  /* Blue for primary actions */
+  --accent: #f093fb;
+  /* Purple for secondary actions */
+
+  /* Data Visualization Colors */
+  --color-primary-school: #4facfe;
+  --color-secondary-school: #f093fb;
+  --color-higher-secondary: #ffd93d;
+  --color-university: #f5576c;
+
+  /* Surfaces - The "Deep Glass" Aesthetic */
+  /* Base panel color: Extremely dark blue, almost black, with high opacity */
+  --glass-bg: rgba(10, 14, 40, 0.90);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+
+  /* Text Colors - WCAG AA Compliance on Dark Backgrounds */
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  /* Cool gray for readability */
+  --text-muted: #718096;
+
+  /* Spacing System */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Layout Dimensions */
+  --sidebar-width: 320px;
+  --sidebar-collapsed-width: 64px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000;
+  /* Fallback */
+  color: var(--text-primary);
+  overflow: hidden;
+  /* Prevent body scroll, everything is in the app container */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Utility Animations */
+@keyframes slideRight {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
