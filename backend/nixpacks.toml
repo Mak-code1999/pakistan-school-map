@@ -1,0 +1,12 @@
+# Configuration for Railway/Nixpacks to install GeoDjango dependencies
+[phases.setup]
+nixPkgs = ["python310", "gdal", "geos", "proj", "postgresql"]
+
+[phases.install]
+cmds = ["python -m venv /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt"]
+
+[phases.build]
+cmds = [". /opt/venv/bin/activate && chmod +x build.sh && ./build.sh"]
+
+[start]
+cmd = ". /opt/venv/bin/activate && gunicorn maktab_project.wsgi:application --bind 0.0.0.0:$PORT"
