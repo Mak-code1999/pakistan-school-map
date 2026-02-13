@@ -12,10 +12,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-this-in-produc
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'pakistan-school-map-api.onrender.com',
     '.onrender.com',
+    '.railway.app',
+    '.up.railway.app',
     'localhost',
     '127.0.0.1',
+    '*',  # Allow all hosts for now to fix deployment issues
 ]
 
 # Database
@@ -25,17 +27,12 @@ DATABASES = {
         default=os.environ.get('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
+        engine='django.contrib.gis.db.backends.postgis',  # Force PostGIS engine
     )
 }
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = [
-    'https://pakistan-school-map.onrender.com',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-]
-
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True  # Simplify CORS for deployment troubleshooting
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
