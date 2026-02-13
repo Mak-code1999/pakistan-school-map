@@ -26,7 +26,7 @@ A modern, interactive GIS web application for visualizing and managing school lo
 
 **Frontend:**
 - React 18
-- Mapbox GL JS (interactive mapping)
+- Leaflet (interactive mapping with OpenStreetMap/CartoDB tiles)
 - Axios (API communication)
 
 **Database:**
@@ -52,7 +52,7 @@ Before running this project, ensure you have:
 - [ ] PostgreSQL 14+ with PostGIS extension
 - [ ] Python 3.10+
 - [ ] Node.js 18+
-- [ ] Mapbox account (free) - [Sign up here](https://www.mapbox.com/)
+
 
 ### Setup Instructions
 
@@ -94,9 +94,8 @@ python manage.py runserver
 cd frontend
 npm install
 
-# Create .env file with your Mapbox token
+# Create .env file
 copy .env.example .env
-# Edit .env and add your Mapbox token
 
 # Run server
 npm start
@@ -111,7 +110,7 @@ npm start
 ## 🎨 Features Showcase
 
 ### Interactive Map
-- **Dark theme** Mapbox map with smooth animations
+- **Dark theme** map with smooth animations (OpenStreetMap/CartoDB tiles)
 - **Province boundaries** with hover effects and highlighting
 - **Color-coded school markers** by category (Primary, Secondary, Higher Secondary, University)
 - **Responsive design** works on desktop, tablet, and mobile
@@ -138,8 +137,7 @@ npm start
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/provinces/` | Get all province boundaries (GeoJSON) |
-| GET | `/api/provinces/search/?q=<query>` | Search province by name |
-| GET | `/api/provinces/<id>/stats/` | Get school count for province |
+
 | GET | `/api/schools/` | Get all schools (GeoJSON) |
 | POST | `/api/schools/` | Create new school |
 
@@ -222,5 +220,5 @@ Created for Jugrafiya interview assignment - February 2026
 ## 🙏 Acknowledgments
 
 - Province boundary data: Natural Earth Data
-- Mapping: Mapbox GL JS
+- Mapping: Leaflet with OpenStreetMap & CartoDB tiles
 - Spatial queries: PostGIS
