@@ -4,9 +4,28 @@ Django settings for maktab_project.
 
 from pathlib import Path
 from decouple import config
+import os
+import sys
 
 # Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# GDAL Configuration for Linux/Railway (if running on Linux)
+if os.name == 'posix':
+    import subprocess
+    try:
+        # Try to find GDAL using gdal-config
+        gdal_version = subprocess.check_output(["gdal-config", "--version"]).decode("utf-8").strip()
+        # Common paths on Railway/Debian (Nixpacks)
+        possible_paths = [
+            f"/usr/lib/libgdal.so",
+            f"/usr/lib/x86_64-linux-gnu/libgdal.so",
+            f"/nix/store/*/lib/libgdal.so" # Nixpacks path pattern
+        ]
+        # We let Django find it via ctypes.util.find_library usually, 
+        # but if that fails, we can set GDAL_LIBRARY_PATH environment variable here.
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        pass
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key-change-in-production')

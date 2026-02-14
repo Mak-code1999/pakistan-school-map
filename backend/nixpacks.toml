@@ -1,6 +1,5 @@
-# Configuration for Railway/Nixpacks to install GeoDjango dependencies
 [phases.setup]
-nixPkgs = ["python310", "gdal", "geos", "proj", "postgresql"]
+nixPkgs = ["python310", "postgresql", "gdal", "geos", "proj", "binutils", "gcc", "zlib"]
 
 [phases.install]
 cmds = ["python -m venv /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt"]
