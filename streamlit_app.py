@@ -158,3 +158,41 @@ with st.sidebar.form("add_school_form"):
             st.toast("✅ School Added Successfully! Refresh to see.", icon="🎉")
         except Exception as e:
             st.error(f"Error adding school: {e}")
+
+# -----------------------------
+# GENERATE SAMPLE DATA (FOR DEMO)
+# -----------------------------
+st.sidebar.markdown("---")
+if st.sidebar.button("⚠️ Generate 50 Sample Schools"):
+    import random
+    try:
+        cur = conn.cursor()
+        # Pakistan Lat/Lon Bounds approx
+        lat_min, lat_max = 24.0, 36.0
+        lon_min, lon_max = 62.0, 74.0
+        
+        categories = ['Primary', 'Secondary', 'Higher Secondary', 'University']
+        
+        progress_bar = st.sidebar.progress(0)
+        
+        for i in range(50):
+            # Random School
+            name = f"Govt School {random.randint(1000, 9999)}"
+            category = random.choice(categories)
+            lat = random.uniform(lat_min, lat_max)
+            lon = random.uniform(lon_min, lon_max)
+            
+            insert_query = """
+            INSERT INTO schools_school (name, category, location, created_at, updated_at)
+            VALUES (%s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326), NOW(), NOW());
+            """
+            cur.execute(insert_query, (name, category, lon, lat))
+            progress_bar.progress((i + 1) / 50)
+            
+        conn.commit()
+        cur.close()
+        st.toast("✅ Generated 50 Schools! Refreshing...", icon="🚀")
+        st.rerun()
+        
+    except Exception as e:
+        st.sidebar.error(f"Error generating data: {e}")
