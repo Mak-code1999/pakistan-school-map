@@ -103,7 +103,7 @@ Follow these steps to set up the project locally.
 pakistan-school-map/
 ├── backend/            # Django REST API
 │   ├── schools/        # Core App (Models, Views, Serializers)
-│   ├── config/         # Project Settings (Updated from maktab_project)
+│   ├── config/         # Project Settings (Internal)
 │   └── manage.py       # Django CLI
 ├── frontend/           # React Application
 │   ├── public/         # Static Assets
