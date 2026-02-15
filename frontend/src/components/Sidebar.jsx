@@ -18,14 +18,14 @@ const Sidebar = ({
     const [searchTerm, setSearchTerm] = useState('');
     const [viewMode, setViewMode] = useState('stats');
 
-    // Automatically switch to list view if a province is selected
+    // Automatically switch to list view if a province is selected or a search term is entered
     useEffect(() => {
-        if (selectedProvince && selectedProvince !== 'all') {
+        if ((selectedProvince && selectedProvince !== 'all') || searchTerm.trim() !== '') {
             setViewMode('list');
         } else {
             setViewMode('stats');
         }
-    }, [selectedProvince]);
+    }, [selectedProvince, searchTerm]);
 
     const handleSearch = (e) => {
         const term = e.target.value;
