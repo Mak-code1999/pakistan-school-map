@@ -1,5 +1,5 @@
 """
-WSGI config for maktab_project project.
+WSGI config for config project.
 """
 
 import os

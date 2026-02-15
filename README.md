@@ -32,7 +32,7 @@ Follow these steps to set up the project locally.
 
 ### 1. Database Setup
 1.  Open pgAdmin or terminal.
-2.  Create a new database named `pakistan_schools_db` (or `maktab_db` if using default config).
+2.  Create a new database named `pakistan_schools_db`.
 3.  Restore the provided SQL dump to populate the database with districts and schools:
     ```bash
     psql -U postgres -d pakistan_schools_db -f database/pakistan_school_map.sql
@@ -103,7 +103,7 @@ Follow these steps to set up the project locally.
 pakistan-school-map/
 ├── backend/            # Django REST API
 │   ├── schools/        # Core App (Models, Views, Serializers)
-│   ├── maktab_project/ # Project Settings (Internal)
+│   ├── config/         # Project Settings (Updated from maktab_project)
 │   └── manage.py       # Django CLI
 ├── frontend/           # React Application
 │   ├── public/         # Static Assets
@@ -116,4 +116,15 @@ pakistan-school-map/
 - **Code Quality**: The codebase follows PEP8 (Python) and ESLint (React) standards.
 - **Security**: Environment variables are used for sensitive configuration. `DEBUG` mode is enabled for development but should be disabled in production.
 - **Performance**: The frontend uses vector tiles and optimized GeoJSON rendering for smooth interaction.
+
+## 🛠️ Troubleshooting (Windows Only)
+
+### "GDAL/GEOS library not found"
+The backend requires PostGIS libraries. In `backend/config/settings.py`, the path is currently set to:
+`OSGEO4W = r"C:\Program Files\PostgreSQL\16"`
+
+If your PostgreSQL is installed in a different location (e.g., Program Files (x86) or Version 15), simply update the `OSGEO4W` path in that file to match your installation.
+
+### "PostGIS extension not found"
+Ensure you have installed the **PostGIS bundle** using the PostgreSQL **Stack Builder** application. Just installing the database is not enough; the spatial extension is required.
 

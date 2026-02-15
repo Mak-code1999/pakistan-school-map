@@ -1,5 +1,5 @@
 """
-ASGI config for maktab_project project.
+ASGI config for config project.
 """
 
 import os
