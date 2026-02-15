@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import MapControls from './components/MapControls';
 import DetailsDrawer from './components/DetailsDrawer';
 import MapLegend from './components/MapLegend'; // Import Legend
@@ -29,6 +31,7 @@ function App() {
     const [selectedProvince, setSelectedProvince] = useState('all');
     const [filteredStats, setFilteredStats] = useState(null);
     const [schoolsData, setSchoolsData] = useState([]);
+    const [provinceBounds, setProvinceBounds] = useState(null);
 
     // Loading State
     const [loading, setLoading] = useState(true);
@@ -145,6 +148,21 @@ function App() {
 
     const handleProvinceSelect = (province) => {
         setSelectedProvince(province);
+
+        if (province === 'all') {
+            setProvinceBounds(null); // Reset or set to Pakistan bounds
+            return;
+        }
+
+        // Find all districts in this province to calculate bounds
+        const provinceDistricts = districts.filter(d => d.properties.province_name === province);
+        if (provinceDistricts.length > 0) {
+            const tempLayer = L.geoJSON({
+                type: 'FeatureCollection',
+                features: provinceDistricts
+            });
+            setProvinceBounds(tempLayer.getBounds());
+        }
     };
 
     const handleSchoolSelect = (school) => {
@@ -188,6 +206,7 @@ function App() {
                 districts={districts}
                 schools={schoolsData}
                 flyToSchool={flyToSchool}
+                provinceBounds={provinceBounds}
             />
 
             <MapLegend />

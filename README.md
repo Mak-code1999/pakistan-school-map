@@ -21,7 +21,7 @@ A professional WebGIS platform for visualizing and managing educational infrastr
 
 ---
 
-## � Installation Guide
+## 📦 Installation Guide
 
 Follow these steps to set up the project locally.
 
@@ -85,7 +85,7 @@ Follow these steps to set up the project locally.
 
 ---
 
-## � API Documentation
+## 🔌 API Documentation
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
@@ -97,7 +97,7 @@ Follow these steps to set up the project locally.
 
 ---
 
-## � Project Structure
+## 📂 Project Structure
 
 ```
 pakistan-school-map/
@@ -117,5 +117,3 @@ pakistan-school-map/
 - **Security**: Environment variables are used for sensitive configuration. `DEBUG` mode is enabled for development but should be disabled in production.
 - **Performance**: The frontend uses vector tiles and optimized GeoJSON rendering for smooth interaction.
 
----
-*Generated for submission. Validated by Senior Developer.*

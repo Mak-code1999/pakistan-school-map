@@ -106,13 +106,19 @@ class SchoolViewSet(viewsets.ModelViewSet):
         Create a new school.
         Request body: {name, category, longitude, latitude}
         """
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        school = serializer.save()
-        
-        # Return GeoJSON response
-        response_serializer = SchoolSerializer(school)
-        return Response(
-            response_serializer.data,
-            status=status.HTTP_201_CREATED
-        )
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            school = serializer.save()
+            
+            # Return GeoJSON response
+            response_serializer = SchoolSerializer(school)
+            return Response(
+                response_serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+        except Exception as e:
+            return Response(
+                {'detail': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )

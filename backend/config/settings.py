@@ -122,6 +122,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
 }
 
 # CORS settings - Allow frontend to access API
@@ -144,8 +148,10 @@ if os.name == 'nt':
     if '64' in platform.architecture()[0]:
         os.environ['OSGEO4W_ROOT'] = OSGEO4W
         os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
-        os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
+        # Corrected PROJ path found in filesystem
+        os.environ['PROJ_LIB'] = OSGEO4W + r"\share\contrib\postgis-3.6\proj"
         os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
+        # Fixed: using full library names as found
         GDAL_LIBRARY_PATH = OSGEO4W + r"\bin\libgdal-35.dll"
         GEOS_LIBRARY_PATH = OSGEO4W + r"\bin\libgeos_c.dll"
 

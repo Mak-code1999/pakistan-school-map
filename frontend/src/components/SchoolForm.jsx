@@ -42,7 +42,10 @@ const SchoolForm = ({ coordinates, onSubmit, onClose }) => {
             onSubmit();
         } catch (err) {
             console.error('Error creating school:', err);
-            setError('Failed to create school. Please try again.');
+            const message = err.response?.data?.detail ||
+                (typeof err.response?.data === 'string' ? err.response.data : null) ||
+                'Failed to create school. Please try again.';
+            setError(message);
             setIsSubmitting(false);
         }
     };

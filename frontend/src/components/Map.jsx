@@ -54,7 +54,8 @@ const Map = ({
     onMapLoad,
     onDistrictSelect,
     mapStyle = 'dark',
-    flyToSchool
+    flyToSchool,
+    provinceBounds
 }) => {
     const [selectedDistrictId, setSelectedDistrictId] = useState(null);
     const [isAddingSchool, setIsAddingSchool] = useState(false);
@@ -63,9 +64,21 @@ const Map = ({
 
     const mapRef = useRef(null);
 
+    // Handle flying to province bounds
+    useEffect(() => {
+        if (provinceBounds && mapRef.current) {
+            mapRef.current.fitBounds(provinceBounds, {
+                padding: [50, 50],
+                maxZoom: 10,
+                animate: true,
+                duration: 1.5
+            });
+        }
+    }, [provinceBounds]);
+
     // Zoom to bounds when data changes
     useEffect(() => {
-        if (mapRef.current && districts && districts.length > 0 && !flyToSchool) {
+        if (mapRef.current && districts && districts.length > 0 && !flyToSchool && !provinceBounds) {
             try {
                 // Create a feature collection to calculate bounds
                 const featureCollection = {
