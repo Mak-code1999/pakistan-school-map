@@ -1,5 +1,5 @@
 """
-Django settings for maktab_project.
+Django settings for config project.
 """
 
 from pathlib import Path
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'maktab_project.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -80,13 +80,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'maktab_project.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database - PostgreSQL with PostGIS
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': config('DB_NAME', default='maktab_db'),
+        'NAME': config('DB_NAME', default='pakistan_schools_db'),
         'USER': config('DB_USER', default='postgres'),
         'PASSWORD': config('DB_PASSWORD', default='postgres'),
         'HOST': config('DB_HOST', default='localhost'),
@@ -125,10 +125,15 @@ REST_FRAMEWORK = {
 }
 
 # CORS settings - Allow frontend to access API
-CORS_ALLOWED_ORIGINS = config(
-    'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000'
-).split(',')
+
+# CORS Settings
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = config(
+        'CORS_ALLOWED_ORIGINS',
+        default='http://localhost:3000'
+    ).split(',')
 
 
 # GDAL Configuration for Windows

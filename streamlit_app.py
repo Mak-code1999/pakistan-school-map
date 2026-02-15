@@ -35,7 +35,7 @@ def init_connection():
 
 try:
     conn = init_connection()
-    st.success("✅ Connected to Database")
+    st.success(f"✅ Connected to Database")
 except Exception as e:
     st.error(f"❌ Database Connection Failed: {e}")
     st.stop()
@@ -47,7 +47,7 @@ except Exception as e:
 def load_data():
     # Load Schools
     query = """
-    SELECT id, name, category, ST_X(location::geometry) as lon, ST_Y(location::geometry) as lat 
+    SELECT id, name, category, longitude as lon, latitude as lat 
     FROM schools_school;
     """
     df = pd.read_sql(query, conn)
@@ -69,7 +69,8 @@ try:
     schools_df = load_data()
     stats_df = load_stats()
 except Exception as e:
-    st.warning("⚠️ Could not load data (Tables might be empty). displaying empty map.")
+    st.error(f"⚠️ DATA LOAD ERROR: {str(e)}")
+    st.warning("Could not load data. See error above.")
     schools_df = pd.DataFrame(columns=['name', 'category', 'lat', 'lon'])
     stats_df = pd.DataFrame(columns=['category', 'count'])
 
@@ -149,10 +150,10 @@ with st.sidebar.form("add_school_form"):
         try:
             cur = conn.cursor()
             insert_query = """
-            INSERT INTO schools_school (name, category, location, created_at, updated_at)
-            VALUES (%s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326), NOW(), NOW());
+            INSERT INTO schools_school (name, category, latitude, longitude, created_at, updated_at)
+            VALUES (%s, %s, %s, %s, NOW(), NOW());
             """
-            cur.execute(insert_query, (new_name, new_cat, new_lon, new_lat))
+            cur.execute(insert_query, (new_name, new_cat, new_lat, new_lon))
             conn.commit()
             cur.close()
             st.toast("✅ School Added Successfully! Refresh to see.", icon="🎉")
@@ -183,10 +184,10 @@ if st.sidebar.button("⚠️ Generate 50 Sample Schools"):
             lon = random.uniform(lon_min, lon_max)
             
             insert_query = """
-            INSERT INTO schools_school (name, category, location, created_at, updated_at)
-            VALUES (%s, %s, ST_SetSRID(ST_MakePoint(%s, %s), 4326), NOW(), NOW());
+            INSERT INTO schools_school (name, category, latitude, longitude, created_at, updated_at)
+            VALUES (%s, %s, %s, %s, NOW(), NOW());
             """
-            cur.execute(insert_query, (name, category, lon, lat))
+            cur.execute(insert_query, (name, category, lat, lon))
             progress_bar.progress((i + 1) / 50)
             
         conn.commit()

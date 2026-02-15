@@ -34,18 +34,38 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     // Initial Data Fetch
+    // Initial Data Fetch
     useEffect(() => {
         document.title = "Pakistan School Map | National Data Portal";
         const fetchGlobalStats = async () => {
             try {
-                const [schoolsRes, districtsRes] = await Promise.all([
-                    fetch(`${config.apiUrl}/schools/`),
-                    fetch(`${config.apiUrl}/districts/`)
-                ]);
+                // Fetch Schools
+                let schools = { features: [] };
+                try {
+                    const schoolsRes = await fetch(`${config.apiUrl}/schools/`);
+                    if (schoolsRes.ok) {
+                        schools = await schoolsRes.json();
+                    } else {
+                        console.error("Failed to fetch schools:", schoolsRes.status);
+                    }
+                } catch (e) {
+                    console.error("Error connecting to schools API:", e);
+                }
 
-                const schools = await schoolsRes.json();
-                const districtsGeo = await districtsRes.json();
+                // Fetch Districts (independently)
+                let districtsGeo = { features: [] };
+                try {
+                    const districtsRes = await fetch(`${config.apiUrl}/districts/`);
+                    if (districtsRes.ok) {
+                        districtsGeo = await districtsRes.json();
+                    } else {
+                        console.warn("Districts API might be down or empty (expected during dev):", districtsRes.status);
+                    }
+                } catch (e) {
+                    console.warn("Could not fetch districts (non-critical):", e);
+                }
 
+                // Set Data
                 setSchoolsData(schools.features || []);
                 setDistricts(districtsGeo.features || []);
 
@@ -63,7 +83,7 @@ function App() {
 
                 setLoading(false);
             } catch (error) {
-                console.error('Error fetching global stats:', error);
+                console.error('Critical error in data fetching:', error);
                 setLoading(false);
             }
         };

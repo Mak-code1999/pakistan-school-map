@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.blurred-tiles {
+    filter: brightness(0.8) grayscale(100%) contrast(1.1);
+    /* Sharp, dark, professional */
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+/* Ensure data layers pop on top */
+.leaflet-overlay-pane {
+    z-index: 600;
+    filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.3));
+    /* Glow effect for vectors */
+}
+
 .app {
     width: 100vw;
     height: 100vh;

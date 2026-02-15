@@ -1,9 +1,9 @@
 /* Sidebar.css - Flexbox Architecture */
 
 .sidebar {
-    background: linear-gradient(135deg, rgba(10, 14, 40, 0.95), rgba(16, 20, 50, 0.95));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 14, 40, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     /* Deep Glass border */
     z-index: 1000;

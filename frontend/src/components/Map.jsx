@@ -100,12 +100,12 @@ const Map = ({
         const isDark = mapStyle === 'dark' || mapStyle === 'satellite';
 
         return {
-            fillColor: isSelected ? '#667eea' : (isDark ? 'rgba(102, 126, 234, 0.1)' : 'rgba(102, 126, 234, 0.2)'),
-            weight: isSelected ? 3 : 1.5,
+            fillColor: isSelected ? '#38bdf8' : 'transparent', // Only fill when selected
+            weight: isSelected ? 1.5 : 0.5, // Thin elegant lines
             opacity: 1,
-            color: isSelected ? '#00f2fe' : '#667eea',
-            dashArray: '3',
-            fillOpacity: isSelected ? 0.6 : (isDark ? 0.2 : 0.1)
+            color: isSelected ? '#38bdf8' : '#0ea5e9', // Cyan
+            dashArray: null, // Solid lines are more premium
+            fillOpacity: isSelected ? 0.5 : 0 // Clean look
         };
     };
 
@@ -212,12 +212,16 @@ const Map = ({
                 center={[30.3753, 69.3451]}
                 zoom={6}
                 className="map-container"
-                style={{ background: mapStyle === 'dark' ? '#0a0e27' : '#e2e8f0' }}
+                style={{ background: '#020617' }} // Deep slate background
+                maxBounds={[[23.0, 60.0], [37.5, 78.0]]} // Restrict to Pakistan region
+                maxBoundsViscosity={1.0}
+                minZoom={5}
             >
                 <TileLayer
-                    key={mapStyle} // Force re-render when style changes
+                    key={mapStyle}
                     attribution={tileLayerConfig.attribution}
                     url={tileLayerConfig.url}
+                    className="blurred-tiles" // CSS class for spotlight effect
                 />
 
                 <MapInteractions
@@ -238,17 +242,25 @@ const Map = ({
                                     if (isAddingSchool) return;
                                     const layer = e.target;
                                     const isSelected = feature.properties.id === selectedDistrictId;
+
+                                    // Premium Hover Effect
                                     layer.setStyle({
-                                        fillOpacity: isSelected ? 0.6 : 0.4,
-                                        weight: 2
+                                        fillOpacity: isSelected ? 0.6 : 0.2, // Subtle glow
+                                        fillColor: isSelected ? '#38bdf8' : '#0ea5e9',
+                                        weight: 1,
+                                        color: '#38bdf8' // Brighter cyan on hover
                                     });
+                                    layer.bringToFront();
                                 },
                                 mouseout: (e) => {
                                     const layer = e.target;
                                     const isSelected = feature.properties.id === selectedDistrictId;
+                                    // Reset to premium thin style
                                     layer.setStyle({
-                                        fillOpacity: isSelected ? 0.6 : (mapStyle === 'dark' || mapStyle === 'satellite' ? 0.2 : 0.1),
-                                        weight: isSelected ? 3 : 1.5
+                                        fillColor: isSelected ? '#38bdf8' : 'transparent',
+                                        color: '#0ea5e9',
+                                        weight: isSelected ? 1.5 : 0.5,
+                                        fillOpacity: isSelected ? 0.5 : 0
                                     });
                                 }
                             });
